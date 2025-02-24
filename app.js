@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -40,5 +41,14 @@ app.get("/users", async (req, res) => {
 
   chechUser();
 });
+
+mongoose
+  .connect(process.env.MONGODB_URL)
+  .then(() => {
+    console.log("Connected to the database!");
+  })
+  .catch(() => {
+    console.log("Connection failed");
+  });
 
 app.listen(3000);
