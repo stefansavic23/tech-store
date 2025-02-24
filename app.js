@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const userRoute = require("./routes/userRoute");
 
 const app = express();
 
@@ -19,27 +20,10 @@ const users = [
 
 app.use(express.json());
 
-app.get("/products", (req, res) => {
-  res.json("radi");
-});
+app.use("/users", userRoute);
 
-app.get("/users", async (req, res) => {
-  const username = req.body.username;
-
-  const chechUser = async () => {
-    //const userPassword = req.body.password;
-    const hashedPassword = await bcrypt.hash(users[0].password, 10);
-
-    const userPassword = req.body.password;
-
-    bcrypt.compare(userPassword, hashedPassword, function (err, result) {
-      if (result) {
-        return res.sendStatus(200);
-      } else return res.sendStatus(406);
-    });
-  };
-
-  chechUser();
+app.get("/", (req, res) => {
+  res.json("Welcome!");
 });
 
 mongoose
