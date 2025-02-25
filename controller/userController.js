@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const bcrypt = require("bcrypt");
 const User = require("../model/user");
 
@@ -40,8 +42,8 @@ const getUser = async (req, res) => {
     const chechUser = async () => {
       bcrypt.compare(userPassword, hashedPassword, function (err, result) {
         if (result && userName === userNameFromDB) {
-          return res.status(200).json("Logged In!");
-        } else return res.status(406).json("Username or password are not correct!Trz again");
+          return res.status(200).json(`Welcome ${userName}!`);
+        } else return res.status(406).json("Username or password are not correct! Try again!");
       });
     };
 

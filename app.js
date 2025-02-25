@@ -1,26 +1,16 @@
 require("dotenv").config();
 
 const express = require("express");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoute");
+const productRoute = require("./routes/productRoute");
 
 const app = express();
-
-const users = [
-  {
-    username: "admin",
-    password: "admin",
-  },
-  {
-    username: "nina",
-    password: "nina",
-  },
-];
 
 app.use(express.json());
 
 app.use("/users", userRoute);
+app.use("/products", productRoute);
 
 app.get("/", (req, res) => {
   res.json("Welcome!");
