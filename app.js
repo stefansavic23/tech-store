@@ -11,20 +11,19 @@ const app = express();
 
 app.use(express.json());
 
-app.set("views", path.join(__dirname, "/views"));
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoute);
 app.use("/products", productRoute);
 
 app.get("/", (req, res) => {
-  res.json("Welcome!");
+  res.render("login");
 });
 
-app.get("/login", (req, res) => {
-  res.render("login");
+app.get("/welcome", (req, res) => {
+  res.render("welcome");
 });
 
 mongoose

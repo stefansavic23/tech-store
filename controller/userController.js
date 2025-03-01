@@ -23,8 +23,9 @@ const createUser = async (req, res) => {
       name: userName,
       password: hashedPassword,
     });
-    res.status(200).json(users);
+    res.render("welcome");
   } catch (error) {
+    res.render("error", { message: error.message });
     res.status(500).json({ message: error.message });
   }
 };

@@ -10,11 +10,11 @@
     <form action="/users" method="POST" align="center">
       <label for="name">
         Name:
-        <input type="text" name="username" />
+        <input type="text" name="username" required minlength="3" />
       </label>
       <label for="name">
         Password:
-        <input type="password" name="password" />
+        <input type="password" name="password" required minlength="8" />
       </label>
       <br />
       <button type="submit">Submit</button>

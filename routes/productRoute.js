@@ -5,7 +5,7 @@ const productController = require("../controller/productController.js");
 router.get("/", productController.getProducts);
 router.get("/:productToFind", productController.getProduct);
 
-router.post("/", productController.createProduct);
+router.post("/create", productController.createProduct);
 
 router.put("/product/:id", productController.updateProduct);
 
