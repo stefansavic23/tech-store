@@ -5,16 +5,16 @@ const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
 const bodyParser = require("body-parser");
-const path = require("path");
 
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoute);
 app.use("/products", productRoute);
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All products</title>
+    <style>
+      div {
+        width: 30%;
+        display: inline-block;
+        border: 3px solid black;
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All products!</h1>
+    <hr />
+    <% products.forEach(product => { %>
+    <div>
+      <h2>Title: <%= product.name %></h2>
+      <hr />
+      <p>Price: <%= product.price %> $</p>
+      <p>Description: <%= product.description %></p>
+      <p>ID: <%= product._id %></p>
+    </div>
+    <% }) %>
+  </body>
+</html>
