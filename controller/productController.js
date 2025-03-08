@@ -8,6 +8,10 @@ const getSearchProduct = (req, res) => {
   res.render("searchProduct");
 };
 
+const getDeleteProduct = (req, res) => {
+  res.render("deleteProduct");
+};
+
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find({});
@@ -63,15 +67,16 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
+    const productToDelete = req.body.id;
 
-    const productToDelete = await Product.deleteOne({ _id: id });
+    const product = await Product.findByIdAndDelete({ _id: productToDelete });
+    const products = await Product.find({});
 
     if (!productToDelete) {
-      return res.status(404).json("Product Not Found!");
+      return res.render("error", { message: "Product not found" });
     }
 
-    res.status(200).json("Product deleted!");
+    res.render("products", { products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -81,6 +86,7 @@ module.exports = {
   getCreateProductPage,
   getProducts,
   getSearchProduct,
+  getDeleteProduct,
   postSearchProduct,
   createProduct,
   updateProduct,
