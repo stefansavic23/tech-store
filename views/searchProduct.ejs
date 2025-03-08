@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All products</title>
     <style>
-      div {
-        width: 30%;
-        display: inline-block;
-        border: 3px solid black;
-        text-align: center;
-      }
-      h1 {
-        text-align: center;
-      }
       ul {
         list-style-type: none;
         margin: 0;
@@ -37,6 +28,10 @@
       li a:hover {
         background-color: rgb(105, 120, 39);
       }
+
+      h1 {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -49,16 +44,18 @@
       </ul>
     </nav>
 
-    <h1>All products!</h1>
-    <hr />
-    <% products.forEach(product => { %>
-    <div>
-      <h2>Title: <%= product.name %></h2>
-      <hr />
-      <p>Price: <%= product.price %> $</p>
-      <p>Description: <%= product.description %></p>
-      <p>ID: <%= product._id %></p>
-    </div>
-    <% }) %>
+    <h1>Search products!</h1>
+
+    <search>
+      <form action="searchProduct" method="POST" align="center">
+        <input
+          type="text"
+          minlength="3"
+          name="searchName"
+          placeholder="Enter product title"
+        />
+        <button type="submit">Search</button>
+      </form>
+    </search>
   </body>
 </html>

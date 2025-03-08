@@ -4,6 +4,10 @@ const getCreateProductPage = (req, res) => {
   res.render("createProduct");
 };
 
+const getSearchProduct = (req, res) => {
+  res.render("searchProduct");
+};
+
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find({});
@@ -13,13 +17,21 @@ const getProducts = async (req, res) => {
   }
 };
 
-const getProduct = async (req, res) => {
+const postSearchProduct = async (req, res) => {
   try {
-    const { productToFind } = req.params;
-    const product = await Product.find({ name: productToFind });
-    res.status(200).json(product);
+    const productToSearch = req.body.searchName;
+
+    const product = await Product.findOne({
+      $text: { $search: productToSearch },
+    });
+
+    if (!product) {
+      return res.status(500).render("error", { message: "Product not found" });
+    }
+
+    res.render("product", { product: product });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
@@ -68,8 +80,9 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   getCreateProductPage,
   getProducts,
+  getSearchProduct,
+  postSearchProduct,
   createProduct,
-  getProduct,
   updateProduct,
   deleteProduct,
 };

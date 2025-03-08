@@ -14,6 +14,7 @@
       h1 {
         text-align: center;
       }
+
       ul {
         list-style-type: none;
         margin: 0;
@@ -49,16 +50,14 @@
       </ul>
     </nav>
 
-    <h1>All products!</h1>
+    <h1>Your product!</h1>
     <hr />
-    <% products.forEach(product => { %>
-    <div>
+    <div align="center">
       <h2>Title: <%= product.name %></h2>
       <hr />
       <p>Price: <%= product.price %> $</p>
       <p>Description: <%= product.description %></p>
       <p>ID: <%= product._id %></p>
     </div>
-    <% }) %>
   </body>
 </html>
