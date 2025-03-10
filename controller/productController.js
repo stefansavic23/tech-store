@@ -69,12 +69,12 @@ const deleteProduct = async (req, res) => {
   try {
     const productToDelete = req.body.id;
 
-    const product = await Product.findByIdAndDelete({ _id: productToDelete });
-    const products = await Product.find({});
-
-    if (!productToDelete) {
+    if (!productToDelete || res.status(200)) {
       return res.render("error", { message: "Product not found" });
     }
+
+    const product = await Product.findByIdAndDelete({ _id: productToDelete });
+    const products = await Product.find({});
 
     res.render("products", { products });
   } catch (error) {
