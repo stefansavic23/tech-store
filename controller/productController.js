@@ -8,6 +8,10 @@ const getSearchProduct = (req, res) => {
   res.render("searchProduct");
 };
 
+const getUpdateProduct = (req, res) => {
+  res.render("updateProduct");
+};
+
 const getDeleteProduct = (req, res) => {
   res.render("deleteProduct");
 };
@@ -17,7 +21,7 @@ const getProducts = async (req, res) => {
     const products = await Product.find({});
     res.render("products", { products });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
@@ -35,33 +39,33 @@ const postSearchProduct = async (req, res) => {
 
     res.render("product", { product: product });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
 const createProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
-    //res.status(200).json(product);
     res.redirect("/products");
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
-const updateProduct = async (req, res) => {
+const postUpdateProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(id, req.body);
-
-    if (!product) {
-      return res.status(404).json("Product not found!");
+    const productToUpdate = req.body.id;
+    /*
+    if (!productToUpdate || res.status(200)) {
+      return res.render("error", { message: "Product not found" });
     }
+    */
+    const product = await Product.findByIdAndUpdate(productToUpdate, req.body);
+    const updatedProduct = await Product.findById(productToUpdate);
 
-    const updatedProduct = await Product.findById(id);
-    res.status(200).json(updatedProduct);
+    res.render("product", { product: updatedProduct });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
@@ -78,7 +82,7 @@ const deleteProduct = async (req, res) => {
 
     res.render("products", { products });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", { message: error.message });
   }
 };
 
@@ -86,9 +90,10 @@ module.exports = {
   getCreateProductPage,
   getProducts,
   getSearchProduct,
+  getUpdateProduct,
   getDeleteProduct,
   postSearchProduct,
+  postUpdateProduct,
   createProduct,
-  updateProduct,
   deleteProduct,
 };
