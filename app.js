@@ -4,19 +4,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
-const bodyParser = require("body-parser");
+const aiRoute = require("./routes/aiRoute");
+const path = require("path");
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.set("views", "./views");
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-//app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoute);
 app.use("/products", productRoute);
+app.use("/api/ai", aiRoute);
 
 app.get("/", (req, res) => {
   res.render("login");

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aks Ai</title>
+  </head>
+  <style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: rgb(105, 120, 39);
+    }
+
+    h1 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/welcome">Home</a></li>
+        <li><a href="/products/create">Create Product</a></li>
+        <li><a href="/products/searchProduct">Search Product</a></li>
+        <li><a href="/products/updateProduct">Update Product</a></li>
+        <li><a href="/products/deleteProduct">Delete Product</a></li>
+        <li><a href="/api/ai/ask">Ask Ai</a></li>
+      </ul>
+    </nav>
+
+    <h1>Ask Ai</h1>
+    <form action="/api/ai/ask" method="POST" align="center">
+      <label for="question">
+        <input type="text" name="question" required />
+      </label>
+      <button type="submit">Ask</button>
+    </form>
+  </body>
+</html>
