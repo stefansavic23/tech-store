@@ -1,7 +1,5 @@
-require("dotenv").config();
-
-const bcrypt = require("bcrypt");
-const User = require("../model/user");
+import bcrypt from "bcrypt";
+import User from "../model/user";
 
 const getUsers = async (req, res) => {
   try {
@@ -40,7 +38,7 @@ const getUser = async (req, res) => {
     const hashedPassword = userFromDB[0].password;
     //const user = await User.find({ name: userName });
 
-    const chechUser = async () => {
+    const checkUser = async () => {
       bcrypt.compare(userPassword, hashedPassword, function (err, result) {
         if (result && userName === userNameFromDB) {
           return res.status(200).json(`Welcome ${userName}!`);
@@ -48,10 +46,10 @@ const getUser = async (req, res) => {
       });
     };
 
-    chechUser();
+    checkUser();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { getUsers, createUser, getUser };
+export { getUsers, createUser, getUser };

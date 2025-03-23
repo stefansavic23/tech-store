@@ -1,4 +1,4 @@
-const Product = require("../model/product");
+import Product from "../model/product";
 
 const getCreateProductPage = (req, res) => {
   res.render("createProduct");
@@ -86,7 +86,7 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getCreateProductPage,
   getProducts,
   getSearchProduct,

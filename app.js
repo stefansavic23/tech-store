@@ -1,11 +1,11 @@
-require("dotenv").config();
+import "dotenv/config";
 
-const express = require("express");
-const mongoose = require("mongoose");
-const userRoute = require("./routes/userRoute");
-const productRoute = require("./routes/productRoute");
-const aiRoute = require("./routes/aiRoute");
-const path = require("path");
+import express from "express";
+import mongoose from "mongoose";
+import userRoute from "./routes/userRoute";
+import productRoute from "./routes/productRoute";
+import aiRoute from "./routes/aiRoute";
+import path from "path";
 
 const app = express();
 
@@ -36,4 +36,4 @@ mongoose
     console.log("Connection failed");
   });
 
-app.listen(3000);
+app.listen(process.env.PORT);
